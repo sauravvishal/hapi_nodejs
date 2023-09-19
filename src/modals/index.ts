@@ -1,0 +1,1 @@
+export { userModal } from "./user.modal";
