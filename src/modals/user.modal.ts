@@ -97,7 +97,6 @@ class UserModal {
                 umetaUpdate = await this.db.query(query2);
             }
 
-            console.log({userUpdate, umetaUpdate})
             if (userUpdate || umetaUpdate) return true;
 
             return false;
