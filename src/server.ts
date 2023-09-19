@@ -5,6 +5,7 @@ import { Server } from '@hapi/hapi';
 import { config } from "./config";
 import { AppDataSource } from "./database";
 import { authController, userController } from "./controllers";
+import { jwtService } from "../src/services";
 
 dotenv.config();
 
@@ -14,6 +15,16 @@ const init = async () => {
             port: config.PORT,
             host: 'localhost'
         });
+        
+        await server.register(require("hapi-auth-jwt2"));
+
+        server.auth.strategy('jwt', 'jwt', {
+            key: config.JWT_SECRET,
+            validate: jwtService.validate,
+            verifyOptions: { algorithms: ['HS256'] }
+        });
+
+        server.auth.default('jwt');
 
         server.route([
             {

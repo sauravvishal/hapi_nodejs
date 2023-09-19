@@ -4,7 +4,7 @@ import { UserType } from "../../database/entities";
 
 class AuthService {
     /**
-     * register: Validation for regiter.
+     * register: Validation for register.
      * @param data 
      * @returns 
      */
@@ -30,6 +30,23 @@ class AuthService {
         const schema = Joi.object({
             email: Joi.string().email().min(4).max(100).required(),
             password: Joi.string().min(5).max(100).required()
+        });
+
+        return schema.validate(data);
+    }
+
+    /**
+     * update: Validation for update user.
+     * @param data 
+     * @returns 
+     */
+    update(data: User) {
+        const schema = Joi.object({
+            email: Joi.string().email().min(4).max(100).optional(),
+            password: Joi.string().min(5).max(100).optional(),
+            firstName: Joi.string().max(250).min(3).optional(),
+            lastName: Joi.string().max(250).min(3).optional(),
+            dateOfBirth: Joi.date().iso().min('1980-01-01T00:00:00Z').max('2020-01-01T00:00:00Z').optional(),
         });
 
         return schema.validate(data);

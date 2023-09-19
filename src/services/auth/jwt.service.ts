@@ -1,33 +1,26 @@
+import { ResponseToolkit } from "hapi";
 import * as jwt from "jsonwebtoken";
 import { config } from "../../config";
+import { userModal } from "../../modals";
 
 class JwtService {
-    /**
-     * createToken: To create token.
-     * @param id 
-     * @returns 
-     */
-    createToken(id: number) {
+    createToken(id: number, type: string) {
         return new Promise((resolve, reject) => {
-            jwt.sign({ id }, config.JWT_SECRET, { expiresIn: 1 * 60 * 60 }, function (err, token) {
+            jwt.sign({ id, type }, config.JWT_SECRET, { expiresIn: 1 * 60 * 60 }, function (err, token) {
                 if (err) resolve(false);
                 resolve(token);
             });
         });
     }
 
-    /**
-     * verifyToken: To verify token.
-     * @param token 
-     * @returns 
-     */
-    verifyToken(token: string) {
-        return new Promise((resolve, reject) => {
-            jwt.verify(token, config.JWT_SECRET, function (err, decoded) {
-                if (err) resolve(false);
-                resolve(decoded);
-            });
-        });
+    async validate(data: any) {
+        try {
+            let [userData] = await userModal.getUserByID(data.id);
+            return { isValid: true, credentials: userData };
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
 }
 
