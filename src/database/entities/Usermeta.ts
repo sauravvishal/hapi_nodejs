@@ -1,6 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
-import { Common } from "./common";
-import { User } from "./User";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm';
+import { Common } from './common';
+import { User } from './User';
 
 @Entity({ name: 'user_meta' })
 export class UserMeta extends Common {
@@ -20,8 +20,8 @@ export class UserMeta extends Common {
     @Column({ name: 'date_of_birth', nullable: true, type: 'date' })
     dateOfBirth!: Date;
 
-    @OneToOne(() => User ,{ onDelete: "CASCADE", onUpdate: "CASCADE" })
-    @JoinColumn({ name: "user_id" })
+    @OneToOne(() => User ,{ onDelete: 'CASCADE', onUpdate: 'CASCADE' })
+    @JoinColumn({ name: 'user_id' })
     user_id!: User;
 
 }

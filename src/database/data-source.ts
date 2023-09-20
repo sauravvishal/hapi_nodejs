@@ -1,10 +1,10 @@
-import "reflect-metadata";
-import { DataSource } from "typeorm";
-import { config } from "../config";
-import { User, UserMeta } from "./entities";
+import 'reflect-metadata';
+import { DataSource } from 'typeorm';
+import { config } from '../config';
+import { User, UserMeta } from './entities';
 
 export const AppDataSource = new DataSource({
-    type: "mysql",
+    type: 'mysql',
     host: config.DB_HOST,
     port: config.DB_PORT,
     username: config.DB_USERNAME,

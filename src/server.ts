@@ -1,11 +1,11 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 import * as Hapi from '@hapi/hapi';
 import { Server } from '@hapi/hapi';
 
-import { config } from "./config";
-import { AppDataSource } from "./database";
-import { authController, userController } from "./controllers";
-import { jwtService } from "../src/services";
+import { config } from './config';
+import { AppDataSource } from './database';
+import { authController, userController } from './controllers';
+import { jwtService } from '../src/services';
 
 dotenv.config();
 
@@ -16,7 +16,7 @@ const init = async () => {
             host: 'localhost'
         });
         
-        await server.register(require("hapi-auth-jwt2"));
+        await server.register(require('hapi-auth-jwt2'));
 
         server.auth.strategy('jwt', 'jwt', {
             key: config.JWT_SECRET,
@@ -28,10 +28,10 @@ const init = async () => {
 
         server.route([
             {
-                method: "GET",
-                path: "/test",
+                method: 'GET',
+                path: '/test',
                 handler: () => {
-                    return { status: 200, message: "Everything is working fine !!!", data: null };
+                    return { status: 200, message: 'Everything is working fine !!!', data: null };
                 }
             },
             ...authController(),
@@ -52,7 +52,7 @@ const init = async () => {
 };
 
 process.on('unhandledRejection', (err) => {
-    console.log("===", { err });
+    console.log('===', { err });
     process.exit(1);
 });
 

@@ -1,6 +1,6 @@
 import { ServerRoute, Request, ResponseToolkit } from '@hapi/hapi';
-import { userModal } from "../../modals";
-import { methods, routes } from "../../routes";
+import { userModal } from '../../modals';
+import { methods, routes } from '../../routes';
 import { authService, bcryptService } from '../../services';
 import { User } from '../../interfaces';
 
@@ -18,15 +18,15 @@ export const userController = (): Array<ServerRoute> => {
 
                     if ((limit != 0) && !(limit && (offset || offset === 0))) return h.response({
                         status: 403,
-                        message: "Validation error in limit or offset.",
+                        message: 'Validation error in limit or offset.',
                         data: null
                     }).code(403);
 
                     const data = await userModal.getAllUsers(limit, offset);
-                    if (!data.length) return h.response({ status: 404, message: "Data not found.", data: null }).code(404);
-                    return { status: 200, message: "Data found.", data };
+                    if (!data.length) return h.response({ status: 404, message: 'Data not found.', data: null }).code(404);
+                    return { status: 200, message: 'Data found.', data };
                 } catch (error) {
-                    return h.response({ status: 400, message: "Something went wrong.", data: null }).code(400);
+                    return h.response({ status: 400, message: 'Something went wrong.', data: null }).code(400);
                 }
             },
             options: {
@@ -39,10 +39,10 @@ export const userController = (): Array<ServerRoute> => {
             path: routes.user,
             async handler(request: Request, h: ResponseToolkit) {
                 try {
-                    if (!request.auth.credentials) return h.response({ status: 404, message: "User not found.", data: null }).code(404);
-                    return { status: 200, message: "Data found.", data: request.auth.credentials };
+                    if (!request.auth.credentials) return h.response({ status: 404, message: 'User not found.', data: null }).code(404);
+                    return { status: 200, message: 'Data found.', data: request.auth.credentials };
                 } catch (error) {
-                    return h.response({ status: 400, message: "Something went wrong.", data: null }).code(400);
+                    return h.response({ status: 400, message: 'Something went wrong.', data: null }).code(400);
                 }
             }
         },
@@ -55,7 +55,7 @@ export const userController = (): Array<ServerRoute> => {
                     const { id } = request.auth.credentials;
                     if (!request.payload) return h.response({
                         status: 404,
-                        message: "Payload is required.",
+                        message: 'Payload is required.',
                         data: null
                     }).code(404);
 
@@ -70,7 +70,7 @@ export const userController = (): Array<ServerRoute> => {
 
                     if (!email && !password && !firstName && !lastName && !dateOfBirth) return h.response({
                         status: 403,
-                        message: "Atleast one field required from email, password, firstName, lastName, dateOfBirth.",
+                        message: 'Atleast one field required from email, password, firstName, lastName, dateOfBirth.',
                         data: null
                     }).code(403);
 
@@ -80,7 +80,7 @@ export const userController = (): Array<ServerRoute> => {
                         const [ifEmailExist] = await userModal.getUserByEmail(email);
                         if (ifEmailExist) return h.response({
                             status: 409,
-                            message: "Can't update, email already exist.",
+                            message: `Can't update, email already exist.`,
                             data: null
                         }).code(409);
                         user['email'] = email;
@@ -99,17 +99,17 @@ export const userController = (): Array<ServerRoute> => {
 
                     if (!updatedData) return h.response({
                         status: 400,
-                        message: "User not updated.",
+                        message: 'User not updated.',
                         data: null
                     }).code(400);
 
                     return h.response({
                         status: 200,
-                        message: "User updated successfully",
+                        message: 'User updated successfully',
                         data: null
                     }).code(200);
                 } catch (error) {
-                    return h.response({ status: 400, message: "Something went wrong.", data: null }).code(400);
+                    return h.response({ status: 400, message: 'Something went wrong.', data: null }).code(400);
                 }
             }
         },
@@ -125,24 +125,24 @@ export const userController = (): Array<ServerRoute> => {
 
                     if (!ifUser) return h.response({
                         status: 404,
-                        message: "User not found.",
+                        message: 'User not found.',
                         data: id
                     }).code(404);
 
                     const deleted = await userModal.deleteUser(id);
                     if (!deleted.affectedRows) return h.response({
                         status: 400,
-                        message: "Something went wrong.",
+                        message: 'Something went wrong.',
                         data: id
                     }).code(400);
 
                     return h.response({
                         status: 200,
-                        message: "User deleted successfully",
+                        message: 'User deleted successfully',
                         data: null
                     }).code(200);
                 } catch (error) {
-                    return h.response({ status: 400, message: "Something went wrong.", data: null }).code(400);
+                    return h.response({ status: 400, message: 'Something went wrong.', data: null }).code(400);
                 }
             }
         }

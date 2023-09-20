@@ -1,7 +1,6 @@
-import { ResponseToolkit } from "hapi";
-import * as jwt from "jsonwebtoken";
-import { config } from "../../config";
-import { userModal } from "../../modals";
+import * as jwt from 'jsonwebtoken';
+import { config } from '../../config';
+import { userModal } from '../../modals';
 
 class JwtService {
     createToken(id: number, type: string) {

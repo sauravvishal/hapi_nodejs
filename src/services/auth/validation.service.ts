@@ -1,6 +1,6 @@
-import Joi from "@hapi/joi";
-import { User } from "../../interfaces";
-import { UserType } from "../../database/entities";
+import Joi from '@hapi/joi';
+import { User } from '../../interfaces';
+import { UserType } from '../../database/entities';
 
 class AuthService {
     /**

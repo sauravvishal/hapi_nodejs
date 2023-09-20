@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
-import { Common } from "./common";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Common } from './common';
 
 export enum UserType {
     user = 'user',

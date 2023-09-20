@@ -1,8 +1,8 @@
 import { ServerRoute, Request, ResponseToolkit } from '@hapi/hapi';
 
-import { methods, routes } from "../../routes";
-import { authService, bcryptService, jwtService } from "../../services";
-import { userModal } from "../../modals";
+import { methods, routes } from '../../routes';
+import { authService, bcryptService, jwtService } from '../../services';
+import { userModal } from '../../modals';
 import { User } from '../../interfaces';
 
 export const authController = (): Array<ServerRoute> => {
@@ -15,7 +15,7 @@ export const authController = (): Array<ServerRoute> => {
                 try {
                     if (!payload) return h.response({
                         status: 404,
-                        message: "Payload is required.",
+                        message: 'Payload is required.',
                         data: null
                     }).code(404);
 
@@ -31,7 +31,7 @@ export const authController = (): Array<ServerRoute> => {
                     const [ifEmailExist] = await userModal.getUserByEmail(email);
                     if (ifEmailExist) return h.response({
                         status: 409,
-                        message: "Email already exist.",
+                        message: 'Email already exist.',
                         data: null
                     }).code(409);
 
@@ -50,14 +50,14 @@ export const authController = (): Array<ServerRoute> => {
                     delete user.password;
                     return h.response({
                         status: 201,
-                        message: "User created successfully",
+                        message: 'User created successfully',
                         data: {
                             id: isCreated,
                             ...user
                         }
                     }).code(201);
                 } catch (error) {
-                    return h.response({ status: 400, message: "Something went wrong.", data: null }).code(400);
+                    return h.response({ status: 400, message: 'Something went wrong.', data: null }).code(400);
                 }
             },
             options: {
@@ -72,7 +72,7 @@ export const authController = (): Array<ServerRoute> => {
                 try {
                     if (!payload) return h.response({
                         status: 404,
-                        message: "Payload is required.",
+                        message: 'Payload is required.',
                         data: null
                     }).code(404);
 
@@ -88,27 +88,27 @@ export const authController = (): Array<ServerRoute> => {
                     const [ifEmailExist] = await userModal.getUserByEmail(email);
                     if (!ifEmailExist) return h.response({
                         status: 404,
-                        message: "Email doesn't exist.",
+                        message: `Email doesn't exist.`,
                         data: null
                     }).code(404);
 
                     const ifPasswordValid = await bcryptService.decryptPassword(password, ifEmailExist.password);
                     if (!ifPasswordValid) return h.response({
                         status: 401,
-                        message: "Incorrect Password.",
+                        message: 'Incorrect Password.',
                         data: null
                     }).code(401);
 
                     const token = await jwtService.createToken(ifEmailExist.id, ifEmailExist.type)
-                    if (!token) return h.response({ status: 400, message: "Something went wrong.", data: null }).code(400);
+                    if (!token) return h.response({ status: 400, message: 'Something went wrong.', data: null }).code(400);
 
                     return h.response({
                         status: 200,
-                        message: "Login successful",
+                        message: 'Login successful',
                         data: { token }
                     }).code(200);
                 } catch (error) {
-                    return h.response({ status: 400, message: "Something went wrong.", data: null }).code(400);
+                    return h.response({ status: 400, message: 'Something went wrong.', data: null }).code(400);
                 }
             },
             options: {

@@ -1,4 +1,4 @@
-import { UserType } from "../database/entities";
+import { UserType } from '../database/entities';
 
 export interface User {
     id?: number,

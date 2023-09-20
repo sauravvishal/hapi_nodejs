@@ -1,6 +1,6 @@
-import { AppDataSource } from "../database";
-import { User as UserInterface } from "../interfaces";
-import { User, UserMeta } from "../database/entities";
+import { AppDataSource } from '../database';
+import { User as UserInterface } from '../interfaces';
+import { User, UserMeta } from '../database/entities';
 
 class UserModal {
     db: any;

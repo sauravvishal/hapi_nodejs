@@ -1,3 +1,3 @@
-import init from "./src/server";
+import init from './src/server';
 
 init();
