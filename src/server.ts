@@ -32,6 +32,9 @@ const init = async () => {
                 path: '/test',
                 handler: () => {
                     return { status: 200, message: 'Everything is working fine !!!', data: null };
+                },
+                options: {
+                    auth: false
                 }
             },
             ...authController(),

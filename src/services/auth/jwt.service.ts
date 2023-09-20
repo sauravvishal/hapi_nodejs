@@ -19,7 +19,6 @@ class JwtService {
         } catch (error) {
             console.log(error)
         }
-        
     }
 }
 

@@ -99,7 +99,7 @@ export const authController = (): Array<ServerRoute> => {
                         data: null
                     }).code(401);
 
-                    const token = await jwtService.createToken(ifEmailExist.id, ifEmailExist.type)
+                    const token = await jwtService.createToken(ifEmailExist.id, ifEmailExist.type);
                     if (!token) return h.response({ status: 400, message: 'Something went wrong.', data: null }).code(400);
 
                     return h.response({
